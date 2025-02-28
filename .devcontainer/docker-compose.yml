@@ -1,0 +1,11 @@
+name: functional-go
+services:
+  functional-go:
+    container_name: functional-go
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ../:/workspace/functional-go
+    stdin_open: true
+    tty: true

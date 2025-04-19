@@ -37,9 +37,9 @@ type instruction struct {
 
 type program map[state]map[information]instruction
 
-// Program is passed to the Turing machine.
+// AddOne is passed to the Turing machine.
 // This program defines
-var Program = program{
+var AddOne = program{
 	q0: {
 		one:   {write: one, move: forward, next: q0},
 		zero:  {write: zero, move: forward, next: q0},

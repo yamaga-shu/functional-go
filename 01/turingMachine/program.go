@@ -35,8 +35,10 @@ type imperative struct {
 	next  state       // next state
 }
 
-// Program is passed to the Turing machine
-var Program = map[state]map[information]imperative{
+type program map[state]map[information]imperative
+
+// programs is passed to the Turing machine
+var programs = program{
 	q0: {
 		one:  {write: one, move: forward, next: q0},
 		zero: {write: zero, move: forward, next: q0},

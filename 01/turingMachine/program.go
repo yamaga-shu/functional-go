@@ -23,40 +23,44 @@ const (
 type information string
 
 const (
-	zero information = "0"
-	one  information = "1"
-	back information = "B"
+	zero  information = "0"
+	one   information = "1"
+	blank information = "B"
 )
 
-// imperative instructs the machine on how to behave based on the current head information
-type imperative struct {
+// instruction instructs the machine on how to behave based on the current head information
+type instruction struct {
 	write information // a value to be written on the tape
 	move  move        // transition of the head
 	next  state       // next state
 }
 
-type program map[state]map[information]imperative
+type program map[state]map[information]instruction
 
-// programs is passed to the Turing machine
-var programs = program{
+// Program is passed to the Turing machine.
+// This program defines
+var Program = program{
 	q0: {
-		one:  {write: one, move: forward, next: q0},
-		zero: {write: zero, move: forward, next: q0},
-		back: {write: back, move: backward, next: q1},
+		one:   {write: one, move: forward, next: q0},
+		zero:  {write: zero, move: forward, next: q0},
+		blank: {write: blank, move: backward, next: q1},
 	},
 	q1: {
-		one:  {write: one, move: forward, next: q2},
-		zero: {write: zero, move: backward, next: q0},
-		back: {write: back, move: backward, next: q3},
+		one:   {write: zero, move: backward, next: q1},
+		zero:  {write: one, move: backward, next: q2},
+		blank: {write: one, move: backward, next: q3},
 	},
 	q2: {
-		one:  {write: one, move: backward, next: q2},
-		zero: {write: zero, move: backward, next: q2},
-		back: {write: back, move: forward, next: q4},
+		one:   {write: one, move: backward, next: q2},
+		zero:  {write: zero, move: backward, next: q2},
+		blank: {write: blank, move: forward, next: q4},
 	},
 	q3: {
-		one:  {write: one, move: forward, next: q4},
-		zero: {write: zero, move: forward, next: q4},
-		back: {write: back, move: forward, next: q4},
+		one:   {write: one, move: forward, next: q4},
+		zero:  {write: zero, move: forward, next: q4},
+		blank: {write: blank, move: forward, next: q4},
 	},
 }
+
+var InitState state = q0
+var EndState state = q4

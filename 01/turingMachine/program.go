@@ -1,6 +1,6 @@
 package turingmachine
 
-// state represents machine's state
+// state represents the machine's state
 type state int
 
 const (
@@ -11,7 +11,7 @@ const (
 	q4
 )
 
-// move represents next position of machine, only backward or forward
+// move represents the next position of the machine, either backward or forward
 type move int
 
 const (
@@ -19,7 +19,7 @@ const (
 	forward
 )
 
-// information represents available information of this turing-machine
+// information represents the available information of this Turing machine
 type information string
 
 const (
@@ -28,9 +28,33 @@ const (
 	back information = "B"
 )
 
-// impertrative would be passed to turing-machine
+// imperative instructs the machine on how to behave based on the current head information
 type imperative struct {
-	write information
-	move  move
-	next  state
+	write information // a value to be written on the tape
+	move  move        // transition of the head
+	next  state       // next state
+}
+
+// Program is passed to the Turing machine
+var Program = map[state]map[information]imperative{
+	q0: {
+		one:  {write: one, move: forward, next: q0},
+		zero: {write: zero, move: forward, next: q0},
+		back: {write: back, move: backward, next: q1},
+	},
+	q1: {
+		one:  {write: one, move: forward, next: q2},
+		zero: {write: zero, move: backward, next: q0},
+		back: {write: back, move: backward, next: q3},
+	},
+	q2: {
+		one:  {write: one, move: backward, next: q2},
+		zero: {write: zero, move: backward, next: q2},
+		back: {write: back, move: forward, next: q4},
+	},
+	q3: {
+		one:  {write: one, move: forward, next: q4},
+		zero: {write: zero, move: forward, next: q4},
+		back: {write: back, move: forward, next: q4},
+	},
 }

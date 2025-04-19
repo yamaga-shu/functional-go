@@ -9,7 +9,7 @@ import (
 func main() {
 	tm := turingmachine.TuringMachine{}
 
-	// result will represent "3" in binary system
+	// result will represent "3" in the binary system
 	result := tm.Calculate(
 		turingmachine.AddOne,
 		turingmachine.Two,

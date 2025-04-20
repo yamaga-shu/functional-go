@@ -38,7 +38,7 @@ type instruction struct {
 type program map[state]map[information]instruction
 
 // AddOne is passed to the Turing machine.
-// This program defines
+// This program defines the logic to add 1 to a given binary number.
 var AddOne = program{
 	q0: {
 		one:   {write: one, move: forward, next: q0},

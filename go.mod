@@ -1,3 +1,3 @@
-module github.com/functional-go
+module github.com/yamaga-shu/functional-go
 
 go 1.23.4

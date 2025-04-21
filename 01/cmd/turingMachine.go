@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	turingmachine "github.com/functional-go/01/turingMachine"
+	turingmachine "github.com/yamaga-shu/functional-go/01/turingMachine"
 )
 
 func main() {
